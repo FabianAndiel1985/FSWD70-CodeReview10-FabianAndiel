@@ -15,9 +15,11 @@
 
     <style type="text/css">
 
-      table,td,th {
-        border:1px solid black;
+      #main {
+        margin-top: 40px;
       }
+
+    
 
     </style>
 
@@ -25,7 +27,7 @@
   </head>
   <body>
 
-    <div class="container-fluid">
+    <div class="container">
 
 
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -48,19 +50,21 @@
 
     </div>  
 
-    <div class="container-fluid">
-      
-      <table>
+    <div class="container" id="main">
 
-      <tr>
-        <th>ISBN</th>
-        <th>title</th> 
-        <th>description</th>
-        <th>type</th>
-        <th>publish date</th>
-        <th>availability</th>
-        <th>publisher</th>
-      </tr>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ISBN</th>
+            <th scope="col">title</th>
+            <th scope="col">description</th>
+            <th scope="col">type</th>
+            <th scope="col">publish date</th>
+            <th scope="col">availability</th>
+            <th scope="col">publisher</th>
+          </tr>
+        </thead>
+
 
 
    
@@ -81,8 +85,8 @@
 
           while($row = mysqli_fetch_assoc($retrievedData) ) {
 
-            echo "<tr> 
-                    <td>".$row['ISBN']."</td>
+            echo "<tbody> 
+                    <th scope='row'>".$row['ISBN']."</th>
                     <td>".$row['title']."</td>
                     <td>".$row['description']."</td>
                     <td>".$row['type']."</td>
@@ -101,7 +105,8 @@
                       </button>
                       </a>
                     </td>
-                  </tr>";
+                  </tr>
+                  </tbody>";
           }
 
        }

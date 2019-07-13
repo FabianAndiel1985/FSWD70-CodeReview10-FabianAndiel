@@ -14,9 +14,10 @@
 
     <style type="text/css">
 
-      table,td,th {
-        border:1px solid black;
+      #backBtn {
+        margin-top: 20px;
       }
+
 
     </style>
 
@@ -24,32 +25,21 @@
   </head>
   <body>
 
-    <div class="container-fluid">
+    <div class="container">
+
+
+
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#">The big library</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Pricing</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
-          </ul>
-        </div>
       </nav> 
+
+
     </div>  
 
-    <div class="container-fluid">
+    <div class="container">
      
 
     <?php
@@ -116,7 +106,7 @@
     <form action="update.php" method="post">
         
         <div class="form-group">
-          <label for="ISBN">ISBN</label>
+          <label for="ISBN"></label>
           <input type="hidden" class="form-control" name="ISBN" id="ISBN" value="<?php echo $ISBN;?>">
         </div>
 
@@ -153,6 +143,9 @@
         <button  class="btn btn-primary" name="saveChange">Save Changes</button>
 
       </form>
+
+      <a href ='displayMedia.php'><button  class="btn btn-secondary" id="backBtn"> Back </button></a>
+
      </div>
 
    
