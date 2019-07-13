@@ -3,6 +3,7 @@
   require_once 'dbconnect.php';
   ?>
 
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -51,7 +52,33 @@
     </div>  
 
     <div class="container-fluid">
-      
+
+      <?php 
+
+        $ISBN = $_GET['ISBN'];
+
+        $query = "SELECT * FROM media WHERE ISBN = $ISBN";
+
+        $retrievedDeleteData = mysqli_query($conn,$query);
+
+        $retrievedDeleteDataArray = mysqli_fetch_array($retrievedDeleteData,MYSQLI_ASSOC);
+
+        // echo $retrievedDeleteDataArray['title'];
+
+        $ISBN =   $retrievedDeleteDataArray['ISBN'];
+        $title =  $retrievedDeleteDataArray['title'];
+        $description =  $retrievedDeleteDataArray['description'];
+        $type =  $retrievedDeleteDataArray['type'];
+        $publish_date =  $retrievedDeleteDataArray['publish_date'];
+        $availability =  $retrievedDeleteDataArray['availability'];
+        $FK_publisher_ID =  $retrievedDeleteDataArray['FK_publisher_ID'];
+       
+      ?>
+     
+
+      <h1> Do you really want to delete following row: </h1>
+
+
       <table>
 
       <tr>
@@ -65,54 +92,73 @@
       </tr>
 
 
-   
+      <?php
+
+       echo "<tr> 
+                    <td>".$ISBN."</td>
+                    <td>".$title."</td>
+                    <td>".$description."</td>
+                    <td>".$type."</td>
+                    <td>".$publish_date."</td>
+                    <td>".$availability."</td>
+                    <td>".$FK_publisher_ID."</td>
+                    
+                  </tr>"
+                  ;
+
+
+                  ?>
+
+      </table>
+
+
+      <form action="delete.php" method="post">
+
+        <input type="hidden" name= "id" value="<?php echo $ISBN;?>" />
+
+        <button type="submit" name="deleteBtn">delete</button>
+       <!--  <button type="button" class="btn btn-secondary btn-sm">back</button> -->
+        
+      </form>
+
+    </div>
+
 
     <?php
 
-       $query = "SELECT * FROM media";
+       if($_POST)
+       {
+        // echo "Hallo";
 
-       $retrievedData= mysqli_query($conn, $query);
+        $id = $_POST['id'];
+
+        $query = "DELETE FROM media WHERE ISBN = {$id}";
+
+        if (mysqli_query($conn, $query))
+        {
+          echo "success";
+        }
+
+        else {
+          echo "try again";
+        }
+
+    }
 
 
-      // $retrievedDataArray=mysqli_fetch_array($retrievedData,MYSQLI_ASSOC);
 
-      // echo $retrievedDataArray['title'];
 
-       if (mysqli_num_rows($retrievedData)>0) {
-        // echo "Fabian ist toll";
+      
 
-          while($row = mysqli_fetch_assoc($retrievedData) ) {
 
-            echo "<tr> 
-                    <td>".$row['ISBN']."</td>
-                    <td>".$row['title']."</td>
-                    <td>".$row['description']."</td>
-                    <td>".$row['type']."</td>
-                    <td>".$row['publish_date']."</td>
-                    <td>".$row['availability']."</td>
-                    <td>".$row['FK_publisher_ID']."</td>
-                    <td>
-                      <a href='update.php?ISBN=".$row['ISBN']."'> 
-                        <button> edit 
-                        </button>
-                      </a>
-                    </td>
-                    <td> 
-                      <a href='delete.php?ISBN=".$row['ISBN']."'>
-                      <button> delete 
-                      </button>
-                      </a>
-                    </td>
-                  </tr>";
-          }
+       
 
-       }
+
+
+
+
 
     ?>
-
-     </table> 
-     </div>
-
    
 
     <!-- Optional JavaScript -->
